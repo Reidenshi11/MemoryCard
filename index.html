@@ -12,20 +12,27 @@
 </head>
 <body>
     <div class="container">
-    <h1>Найди пару</h1>
-
-    <div class="stats">
-        <div class="moves">Ходы: <span id="moves-count">0</span></div>
-        <div class="timer">Время: <span id="time">00:00</span></div>
-    </div>
-
-    <div class="game-board" id="game-board"></div>
-
-    <div class="controls">
-        <button id="restart-btn">Новая игра</button>
-    </div>
-
-    <div class="win-message" id="win-message">Поздравляем! Вы выиграли!</div>
+        <h1>Найди пару</h1>
+        
+        <div class="difficulty">
+            <button class="difficulty-btn active" data-difficulty="easy">Легко</button>
+            <button class="difficulty-btn" data-difficulty="medium">Средне</button>
+            <button class="difficulty-btn" data-difficulty="hard">Сложно</button>
+        </div>
+        
+        <div class="stats">
+            <div class="moves">Ходы: <span id="moves-count">0</span></div>
+            <div class="score">Очки: <span id="score">0</span></div>
+            <div class="timer">Время: <span id="time">00:00</span></div>
+        </div>
+        
+        <div class="game-board" id="game-board"></div>
+        
+        <div class="controls">
+            <button id="restart-btn">Новая игра</button>
+        </div>
+        
+        <div class="win-message" id="win-message">Поздравляем! Вы выиграли!</div>
     </div>
 </body>
 </html>

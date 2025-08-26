@@ -33,6 +33,22 @@ h1 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+.difficulty-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.difficulty-btn.active {
+    background: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
 .stats {
     display: flex;
     justify-content: space-between;
@@ -66,6 +82,11 @@ h1 {
 
 .card.flipped {
     transform: rotateY(180deg);
+}
+
+.card.matched {
+    transform: rotateY(180deg) scale(0.9);
+    box-shadow: 0 0 15px #4caf50;
 }
 
 .card-front, .card-back {
@@ -127,6 +148,33 @@ button:active {
     color: #ffeb3b;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     display: none;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.shake {
+    animation: shake 0.3s ease-in-out;
+}
+
+.score-popup {
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4caf50;
+    opacity: 0;
+    transition: all 0.5s;
+    pointer-events: none;
 }
 
 @media (max-width: 600px) {
