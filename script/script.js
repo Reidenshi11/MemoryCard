@@ -1,21 +1,32 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const gameBoard = document.getElementById('game-board');
-    const movesCount = document.getElementById('moves-count');
-    const scoreDisplay = document.getElementById('score');
-    const timeDisplay = document.getElementById('time');
-    const restartBtn = document.getElementById('restart-btn');
-    const winMessage = document.getElementById('win-message');
-    const difficultyButtons = document.querySelectorAll('.difficulty-btn');
-    
-    let cards = [];
-    let flippedCards = [];
-    let moves = 0;
-    let score = 0;
-    let matchedPairs = 0;
-    let gameStarted = false;
-    let timer = 0;
-    let timerInterval;
-    let difficulty = 'easy';
+        document.addEventListener('DOMContentLoaded', () => {
+            const authContainer = document.getElementById('auth-container');
+            const userInfo = document.getElementById('user-info');
+            const usernameInput = document.getElementById('username-input');
+            const loginBtn = document.getElementById('login-btn');
+            const usernameDisplay = document.getElementById('username-display');
+            const logoutBtn = document.getElementById('logout-btn');
+            const gameBoard = document.getElementById('game-board');
+            const movesCount = document.getElementById('moves-count');
+            const scoreDisplay = document.getElementById('score');
+            const timeDisplay = document.getElementById('time');
+            const restartBtn = document.getElementById('restart-btn');
+            const leaderboardBtn = document.getElementById('leaderboard-btn');
+            const winMessage = document.getElementById('win-message');
+            const difficultyButtons = document.querySelectorAll('.difficulty-btn');
+            const leaderboardModal = document.getElementById('leaderboard-modal');
+            const leaderboardBody = document.getElementById('leaderboard-body');
+            const closeLeaderboardBtn = document.getElementById('close-leaderboard');
+            
+            let cards = [];
+            let flippedCards = [];
+            let moves = 0;
+            let score = 0;
+            let matchedPairs = 0;
+            let gameStarted = false;
+            let timer = 0;
+            let timerInterval;
+            let difficulty = 'easy';
+            let currentUser = null;
     
     // Символы для карточек (пары) в зависимости от сложности
     const cardSymbols = {
@@ -23,6 +34,37 @@ document.addEventListener('DOMContentLoaded', () => {
         medium: ['🍍', '🍌', '🍑', '🍏', '🍣', '🌼', '🍒', '🥝'],
         hard: ['🍎', '🍞', '🍏', '🌷', '🎃', '🍦', '🌝', '🌜', '🌳', '🍄', '🥥', '🍋']
     };
+    
+    // Проверяем, есть ли сохраненный пользователь
+    const savedUser = localStorage.getItem('memoryGameUser');
+    if (savedUser) {
+        currentUser = savedUser;
+        usernameDisplay.textContent = currentUser;
+        authContainer.style.display = 'none';
+        userInfo.style.display = 'flex';
+    }
+    
+    // Обработчик входа
+    loginBtn.addEventListener('click', () => {
+        const username = usernameInput.value.trim();
+        if (username) {
+            currentUser = username;
+            localStorage.setItem('memoryGameUser', username);
+            usernameDisplay.textContent = username;
+            authContainer.style.display = 'none';
+            userInfo.style.display = 'flex';
+        } else {
+            alert('Пожалуйста, введите логин');
+        }
+    });
+    
+    // Обработчик выхода
+    logoutBtn.addEventListener('click', () => {
+        currentUser = null;
+        localStorage.removeItem('memoryGameUser');
+        authContainer.style.display = 'block';
+        userInfo.style.display = 'none';
+    });
     
     // Обработчики для кнопок сложности
     difficultyButtons.forEach(btn => {
@@ -32,6 +74,21 @@ document.addEventListener('DOMContentLoaded', () => {
             difficulty = btn.dataset.difficulty;
             initGame();
         });
+    });
+    
+    // Обработчик кнопки таблицы рекордов
+    leaderboardBtn.addEventListener('click', showLeaderboard);
+    
+    // Обработчик закрытия таблицы рекордов
+    closeLeaderboardBtn.addEventListener('click', () => {
+        leaderboardModal.style.display = 'none';
+    });
+    
+    // Закрытие модального окна при клике вне его
+    window.addEventListener('click', (e) => {
+        if (e.target === leaderboardModal) {
+            leaderboardModal.style.display = 'none';
+        }
     });
     
     // Инициализация игры
@@ -110,6 +167,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Переворот карточки
     function flipCard(card) {
+        // Если пользователь не авторизован
+        if (!currentUser) {
+            alert('Пожалуйста, войдите в систему чтобы играть');
+            return;
+        }
+        
         // Если игра еще не началась, запускаем таймер
         if (!gameStarted) {
             startTimer();
@@ -231,11 +294,95 @@ document.addEventListener('DOMContentLoaded', () => {
             Очки: ${score}
             </div>
         `;
+        
+        // Сохраняем результат в таблице рекордов
+        if (currentUser) {
+            saveScore();
+        }
+    }
+    
+    // Сохранение результата
+    function saveScore() {
+        // Получаем текущие результаты из localStorage
+        let leaderboard = JSON.parse(localStorage.getItem('memoryGameLeaderboard')) || [];
+        
+        // Добавляем новый результат
+        const result = {
+            player: currentUser,
+            difficulty: difficulty,
+            score: score,
+            time: timer,
+            moves: moves,
+            date: new Date().toLocaleDateString('ru-RU')
+        };
+        
+        leaderboard.push(result);
+        
+        // Сортируем по очкам (по убыванию)
+        leaderboard.sort((a, b) => b.score - a.score);
+        
+        // Ограничиваем топ-10 результатов
+        if (leaderboard.length > 10) {
+            leaderboard = leaderboard.slice(0, 10);
+        }
+        
+        // Сохраняем обратно в localStorage
+        localStorage.setItem('memoryGameLeaderboard', JSON.stringify(leaderboard));
+    }
+    
+    // Показать таблицу рекордов
+    function showLeaderboard() {
+        // Получаем результаты из localStorage
+        const leaderboard = JSON.parse(localStorage.getItem('memoryGameLeaderboard')) || [];
+        
+        // Очищаем таблицу
+        leaderboardBody.innerHTML = '';
+        
+        // Заполняем таблицу
+        if (leaderboard.length === 0) {
+            leaderboardBody.innerHTML = '<tr><td colspan="7" style="text-align: center;">Пока нет результатов</td></tr>';
+        } else {
+            leaderboard.forEach((result, index) => {
+                const row = document.createElement('tr');
+                
+                // Преобразуем время в формат мм:сс
+                const minutes = Math.floor(result.time / 60).toString().padStart(2, '0');
+                const seconds = (result.time % 60).toString().padStart(2, '0');
+                const timeFormatted = `${minutes}:${seconds}`;
+                
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${result.player}</td>
+                    <td>${getDifficultyName(result.difficulty)}</td>
+                    <td>${result.score}</td>
+                    <td>${timeFormatted}</td>
+                    <td>${result.moves}</td>
+                    <td>${result.date}</td>
+                `;
+                
+                leaderboardBody.appendChild(row);
+            });
+        }
+        
+        // Показываем модальное окно
+        leaderboardModal.style.display = 'flex';
+    }
+    
+    // Получить название сложности
+    function getDifficultyName(diff) {
+        switch(diff) {
+            case 'easy': return 'Легко';
+            case 'medium': return 'Средне';
+            case 'hard': return 'Сложно';
+            default: return diff;
+        }
     }
     
     // Обработчик кнопки перезапуска
     restartBtn.addEventListener('click', initGame);
     
     // Инициализируем игру при загрузке страницы
-    initGame();
+    if (currentUser) {
+        initGame();
+    }
 });
