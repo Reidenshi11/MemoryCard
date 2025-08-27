@@ -1,0 +1,226 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 900px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+    color: white;
+    text-align: center;
+    padding: 25px 20px;
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.app-container {
+    padding: 25px;
+}
+
+.input-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.input-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 500;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input:focus, select:focus {
+    border-color: #ff7eb3;
+    outline: none;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+button {
+    background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+    flex: 1;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+#clearHistory {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+}
+
+.compliment-section {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 25px;
+    text-align: center;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.compliment-text {
+    font-size: 1.6rem;
+    color: #333;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.compliment-name {
+    font-weight: bold;
+    color: #ff758c;
+}
+
+.compliment-category {
+    font-style: italic;
+    color: #888;
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.history-section {
+    margin-top: 30px;
+}
+
+h2 {
+    color: #555;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.history-list {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.history-item {
+    background: #f5f5f5;
+    border-radius: 8px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-left: 4px solid #ff7eb3;
+    display: flex;
+    justify-content: space-between;
+}
+
+.history-content {
+    flex: 1;
+}
+
+.history-name {
+    font-weight: bold;
+    color: #ff758c;
+}
+
+.history-category {
+    font-size: 0.8rem;
+    color: #999;
+    margin-left: 8px;
+    background: #eee;
+    padding: 2px 6px;
+    border-radius: 10px;
+}
+
+.history-time {
+    color: #999;
+    font-size: 0.9rem;
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+.empty-history {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+}
+
+@media (max-width: 600px) {
+    .input-section {
+        flex-direction: column;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .compliment-text {
+        font-size: 1.3rem;
+    }
+    
+    .history-item {
+        flex-direction: column;
+    }
+    
+    .history-time {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+    
+    .buttons {
+        flex-direction: column;
+    }
+}

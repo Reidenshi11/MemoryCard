@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор комплиментов</title>
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <script defer src="./script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Генератор комплиментов</h1>
+            <p>Сделайте день вашей девушки ярче!</p>
+        </header>
+        
+        <div class="app-container">
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="nameInput">Имя девушки</label>
+                    <input type="text" id="nameInput" placeholder="Введите имя">
+                </div>
+                
+                <div class="input-group">
+                    <label for="categorySelect">Категория комплиментов</label>
+                    <select id="categorySelect">
+                        <option value="all">Все категории</option>
+                        <option value="romantic">Романтические</option>
+                        <option value="poetic">Поэтические</option>
+                        <option value="passionate">Страстные</option>
+                        <option value="friendly">Дружеские</option>
+                        <option value="playful">Игривые/Пошлые</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <button id="generateBtn">Сгенерировать комплимент</button>
+                <button id="clearHistory">Очистить историю</button>
+            </div>
+            
+            <div class="compliment-section">
+                <p class="compliment-text">Здесь появится ваш комплимент</p>
+                <p class="compliment-category">Выберите категорию и нажмите кнопку</p>
+            </div>
+            
+            <div class="history-section">
+                <h2>
+                    <span>История комплиментов</span>
+                    <span id="historyCount"></span>
+                </h2>
+                <div class="history-list" id="historyList">
+                    <div class="empty-history">История пуста</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

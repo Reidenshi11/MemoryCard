@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор пошлых фраз</title>
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <script defer src="./script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Генератор пошлых фраз</h1>
+            <p class="subtitle">Выбери тему, введи имя и получи свою персональную пошлость!</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="input-section">
+                <div class="section-title">Создание фразы</div>
+                
+                <div class="input-group">
+                    <label for="nameInput">Имя адресата:</label>
+                    <input type="text" id="nameInput" placeholder="Введите имя" value="Милка">
+                </div>
+                
+                <div class="input-group">
+                    <label>Выберите тему:</label>
+                    <div class="theme-selector">
+                        <button class="theme-btn active" data-theme="flirt">Флирт</button>
+                        <button class="theme-btn" data-theme="vulgar">Вульгарные</button>
+                        <button class="theme-btn" data-theme="funny">Смешные</button>
+                        <button class="theme-btn" data-theme="romantic">Романтичные</button>
+                    </div>
+                </div>
+                
+                <button id="generateBtn" class="generate-btn">Сгенерировать фразу!</button>
+                
+                <div class="result" id="result">
+                    Здесь появится сгенерированная фраза
+                </div>
+            </div>
+            
+            <div class="history-section">
+                <div class="section-title">История генерации</div>
+                <div class="history-list" id="historyList">
+                    <div class="history-item">История будет отображаться здесь</div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Генератор пошлых фраз © 2023 | Используйте с осторожностью!</p>
+        </footer>
+    </div>
+
+</body>
+</html>
