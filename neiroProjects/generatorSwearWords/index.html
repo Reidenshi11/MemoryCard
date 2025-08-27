@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор изысканных ругательств</title>
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <script defer src="./script.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Генератор изысканных ругательств</h1>
+        
+        <div class="tab">
+            <button class="tablinks active" onclick="openTab(event, 'Generator')">Генератор</button>
+            <button class="tablinks" onclick="openTab(event, 'History')">История</button>
+        </div>
+        
+        <div id="Generator" class="tabcontent" style="display: block;">
+            <div class="input-group">
+                <label for="name">Имя человека, которого нужно поругать:</label>
+                <input type="text" id="name" placeholder="Введите имя" autocomplete="off">
+            </div>
+            
+            <div class="radio-group">
+                <label>Выберите тип ругательств:</label>
+                <div class="radio-option">
+                    <input type="radio" id="clean" name="insultType" value="clean" checked>
+                    <label for="clean">Без мата (цензурные)</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="profanity" name="insultType" value="profanity">
+                    <label for="profanity">С матом (нецензурные)</label>
+                </div>
+            </div>
+            
+            <button id="generateBtn">
+                <span>Сгенерировать ругательство</span>
+            </button>
+            
+            <div class="result" id="result" style="display: none;">
+                <div class="insult-text" id="insultText"></div>
+                <button class="copy-btn" id="copyBtn">Копировать в буфер обмена</button>
+            </div>
+        </div>
+        
+        <div id="History" class="tabcontent">
+            <h2>История генераций</h2>
+            <button id="clearHistoryBtn" class="secondary">Очистить историю</button>
+            <div id="historyList"></div>
+        </div>
+        
+        <div class="footer">
+            <p>Данное приложение создано в юмористических целях. Не используйте его для причинения реального вреда.</p>
+        </div>
+    </div>
+
+</body>
+</html>

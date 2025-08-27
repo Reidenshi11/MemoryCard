@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор поздравлений с Днем Рождения</title>
+
+    <link rel="stylesheet" href="./style.css" />
+
+    <script defer src="./script.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎂 Генератор поздравлений 🎉</h1>
+            <p>Создайте уникальное поздравление с днем рождения!</p>
+        </div>
+        
+        <div class="content">
+            <div class="inputs">
+                <div class="input-group">
+                    <label for="name">Имя именинника:</label>
+                    <input type="text" id="name" placeholder="Введите имя">
+                </div>
+                
+                <div class="input-group">
+                    <label for="age">Возраст:</label>
+                    <input type="number" id="age" placeholder="Введите возраст" min="1" max="120">
+                </div>
+                
+                <div class="input-group">
+                    <label for="style">Стиль поздравления:</label>
+                    <select id="style">
+                        <option value="general">Общее</option>
+                        <option value="funny">Юмористическое</option>
+                        <option value="heartfelt">Душевное</option>
+                        <option value="official">Официальное</option>
+                        <option value="poetic">Поэтическое</option>
+                        <option value="child">Детское</option>
+                    </select>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="add-humor" checked>
+                    <label for="add-humor">Добавить юмор</label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="add-wishes" checked>
+                    <label for="add-wishes">Добавить пожелания</label>
+                </div>
+                
+                <button class="btn" id="generate-btn">Сгенерировать поздравление</button>
+                <button class="btn btn-copy" id="copy-btn">Скопировать поздравление</button>
+                
+                <div class="history">
+                    <h3>История поздравлений</h3>
+                    <div class="history-list" id="history-list">
+                        <!-- История будет добавляться здесь -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="preview">
+                <div class="result">
+                    <h2>Ваше поздравление:</h2>
+                    <p class="congratulation-text" id="congratulation-text">
+                        Здесь появится сгенерированное поздравление...
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>  
